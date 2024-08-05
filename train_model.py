@@ -34,7 +34,7 @@ def train_model(images_dir, labels_dir, model_path, img_size=512, batch_size=2, 
         model_path (str): Caminho para salvar o modelo treinado.
         img_size (int, optional): Tamanho para redimensionar as imagens. Padrão é 512.
         batch_size (int, optional): Tamanho do batch para o DataLoader. Padrão é 2.
-        epochs (int, optional): Número de épocas para treinar. Padrão é 10.
+        epochs (int, optional): Número de épocas para treinar. Padrão é 20.
         learning_rate (float, optional): Taxa de aprendizado para o otimizador. Padrão é 0.001.
         seed (int, optional): Seed para reprodutibilidade. Padrão é 42.
     """
@@ -106,10 +106,10 @@ def train_model(images_dir, labels_dir, model_path, img_size=512, batch_size=2, 
 
         print(f'Epoch {epoch+1}/{epochs}, Loss: {epoch_loss:.4f}, Val Loss: {val_loss:.4f}, Precision: {precision:.4f}, Recall: {recall:.4f}, F1 Score: {f1:.4f}')
 
-        if val_loss < best_val_loss:
-            best_val_loss = val_loss
-            torch.save(model.state_dict(), model_path)
-            print(f'Modelo salvo em: {model_path}')
+        # Salva o modelo com o número da época no nome do arquivo
+        epoch_model_path = f"{model_path}_epoch_{epoch+1}.h5"
+        torch.save(model.state_dict(), epoch_model_path)
+        print(f'Modelo salvo em: {epoch_model_path}')
 
     # Teste
     model.eval()
