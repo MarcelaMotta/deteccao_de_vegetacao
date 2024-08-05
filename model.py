@@ -27,15 +27,15 @@ class SimpleCNN(nn.Module):
 
         # Decoder
         self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(512, 256, kernel_size=2, stride=2),  # Upsample to 128x128
+            nn.ConvTranspose2d(512, 256, kernel_size=2, stride=2),
             nn.ReLU(inplace=True),
             nn.Conv2d(256, 128, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
-            nn.ConvTranspose2d(128, 64, kernel_size=2, stride=2),   # Upsample to 256x256
+            nn.ConvTranspose2d(128, 64, kernel_size=2, stride=2),
             nn.ReLU(inplace=True),
-            nn.Conv2d(64, 64, kernel_size=3, padding=1),  # Extra layer to refine output
+            nn.Conv2d(64, 64, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
-            nn.ConvTranspose2d(64, 1, kernel_size=2, stride=2)   # Upsample to 512x512
+            nn.ConvTranspose2d(64, 1, kernel_size=2, stride=2)
         )
 
     def forward(self, x):

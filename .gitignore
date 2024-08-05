@@ -2,3 +2,6 @@ imagem_inicial
 imagens_divididas
 imagens_divididas_binarias
 main.ipynb
+modelo_treinado.h5
+__pycache__/
+train_model_legado.py
